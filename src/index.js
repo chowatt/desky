@@ -1,0 +1,11 @@
+import _ from 'lodash';
+import 'jquery';
+import 'jquery.easing';
+import 'popper.js';
+import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'axios';
+import 'datatables.net';
+import 'datatables.net-dt/css/jquery.dataTables.min.css';
+import 'admin-lte';
+import 'admin-lte/dist/css/adminlte.min.css';

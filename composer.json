@@ -9,7 +9,21 @@
         "cakephp/cakephp": "~4.2.0",
         "cakephp/migrations": "@stable",
         "cakephp/plugin-installer": "^1.3",
-        "mobiledetect/mobiledetectlib": "^2.8"
+        "mobiledetect/mobiledetectlib": "^2.8",
+        "adldap2/adldap2": "^10.3",
+        "cakephp/authentication": "2.0",
+        "cakephp/authorization": "2.0",
+        "dereuromark/cakephp-databaselog": "^3.1",
+        "devster/ubench": "^2.1",
+        "directorytree/ldaprecord": "^2.5",
+        "friendsofcake/bootstrap-ui": "^3.1",
+        "guzzlehttp/guzzle": "^7.0",
+        "hackzilla/password-generator": "^1.6",
+        "hevertonfreitas/cakephp-audit-log": "^4.0",
+        "league/csv": "^9.7",
+        "lorenzo/cakephp-email-queue": "^4.0",
+        "phpoffice/phpspreadsheet": "^1.18",
+        "yohang/finite": "^1.2"
     },
     "require-dev": {
         "cakephp/bake": "^2.3",

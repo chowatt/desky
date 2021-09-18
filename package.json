@@ -1,0 +1,44 @@
+{
+  "name": "desky",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chowatt/desky.git"
+  },
+  "author": "Chris Howatt <CHowatt@galencollege.edu>",
+  "license": "None",
+  "dependencies": {
+    "@popperjs/core": "^2.9.2",
+    "admin-lte": "3.1",
+    "axios": "^0.21.3",
+    "bootstrap": "^4.6.0",
+    "browserify": "^17.0.0",
+    "commonjs": "^0.0.1",
+    "datatables.net": "^1.11.1",
+    "datatables.net-dt": "^1.11.1",
+    "jquery": "^3.6.0",
+    "jquery.easing": "^1.4.1",
+    "lodash": "^4.17.21",
+    "popper.js": "^1.16.1"
+  },
+  "devDependencies": {
+    "css-loader": "^6.2.0",
+    "mini-css-extract-plugin": "^2.1.0",
+    "style-loader": "^3.2.1",
+    "webpack": "^5.53.0",
+    "webpack-cli": "^4.8.0"
+  },
+  "description": "![Build Status](https://github.com/cakephp/app/actions/workflows/ci.yml/badge.svg?branch=master) [![Total Downloads](https://img.shields.io/packagist/dt/cakephp/app.svg?style=flat-square)](https://packagist.org/packages/cakephp/app) [![PHPStan](https://img.shields.io/badge/PHPStan-level%207-brightgreen.svg?style=flat-square)](https://github.com/phpstan/phpstan)",
+  "bugs": {
+    "url": "https://github.com/chowatt/desky/issues"
+  },
+  "homepage": "https://github.com/chowatt/desky#readme",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": []
+}

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 /**
@@ -14,6 +15,7 @@ declare(strict_types=1);
  * @since     3.3.0
  * @license   https://opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace App;
 
 use Cake\Core\Configure;
@@ -29,6 +31,18 @@ use Cake\ORM\Locator\TableLocator;
 use Cake\Routing\Middleware\AssetMiddleware;
 use Cake\Routing\Middleware\RoutingMiddleware;
 
+use Authentication\AuthenticationService;
+use Authentication\AuthenticationServiceInterface;
+use Authentication\AuthenticationServiceProviderInterface;
+use Authentication\Middleware\AuthenticationMiddleware;
+use Cake\Routing\Router;
+use Psr\Http\Message\ServerRequestInterface;
+
+use Authorization\AuthorizationService;
+use Authorization\AuthorizationServiceInterface;
+use Authorization\AuthorizationServiceProviderInterface;
+use Authorization\Middleware\AuthorizationMiddleware;
+
 /**
  * Application setup class.
  *
@@ -36,6 +50,9 @@ use Cake\Routing\Middleware\RoutingMiddleware;
  * want to use in your application.
  */
 class Application extends BaseApplication
+implements
+    AuthenticationServiceProviderInterface
+    //AuthorizationServiceProviderInterface
 {
     /**
      * Load all the application configuration and bootstrap logic.
@@ -44,7 +61,15 @@ class Application extends BaseApplication
      */
     public function bootstrap(): void
     {
+        $this->addPlugin('BootstrapUI');
+
         $this->addPlugin('Migrations');
+        $this->addPlugin('EmailQueue');
+
+        $this->addPlugin('DatabaseLog');
+
+        $this->addPlugin('AuditLog');
+        $this->addPlugin('Authorization');
 
         // Call parent to load bootstrap from files.
         parent::bootstrap();
@@ -94,6 +119,8 @@ class Application extends BaseApplication
             // using it's second constructor argument:
             // `new RoutingMiddleware($this, '_cake_routes_')`
             ->add(new RoutingMiddleware($this))
+            ->add(new AuthenticationMiddleware($this))
+            //->add(new AuthorizationMiddleware($this))
 
             // Parse various types of encoded request bodies so that they are
             // available as array through $request->getData()
@@ -138,5 +165,35 @@ class Application extends BaseApplication
         $this->addPlugin('Migrations');
 
         // Load more plugins here
+    }
+
+    public function getAuthenticationService(ServerRequestInterface $request): AuthenticationServiceInterface
+    {
+
+        $authenticationService = new AuthenticationService();
+
+        // Load the authenticators, you want session first
+        $authenticationService->loadAuthenticator('Authentication.Session');
+
+        $authenticationService->loadIdentifier('Authentication.Password', [
+            'fields' => [
+                'username' => 'username',
+                'password' => 'password',
+            ],
+            'resolver' => [
+                'className' => 'Authentication.Orm',
+                'finder' => 'identity'
+            ]
+        ]);
+
+        $authenticationService->loadAuthenticator('Authentication.Form', [
+            'fields' => [
+                'username' => 'username',
+                'password' => 'password',
+            ],
+            'loginUrl' => Router::url('/users/login'),
+        ]);
+    
+        return $authenticationService;
     }
 }
