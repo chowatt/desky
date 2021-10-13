@@ -5,41 +5,59 @@
  * @var \App\Model\Entity\User $user
  */
 ?>
-<h1><?= __("Administrator Accounts");?></h1>
 
 <div class="row">
-    <aside class="col-md-2">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <ul class="nav flex-column">
-                <li class="nav-item">
-
-                    <?= $this->Form->postLink(
-                        __('Delete'),
-                        ['action' => 'delete', $user->id],
-                        ['confirm' => __('Are you sure you want to delete # {0}?', $user->id), 'class' => 'side-nav-item']
-                    ) ?>
-                </li>
-                <li class="nav-item">
-                    <?= $this->Html->link(__('List Users'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-                </li>
-            </ul>
-        </div>
-    </aside>
     <div class="col-md-8">
-        <div class="users form content">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Edit User</h3>
+            </div>
+
             <?= $this->Form->create($user) ?>
-            <fieldset>
-                <legend><?= __('Edit User') ?></legend>
-                <?php
-                echo $this->Form->control('username');
-                echo $this->Form->control('email');
-                echo $this->Form->control('password');
-                echo $this->Form->control('roles._ids');
-                ?>
-            </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
+            <div class="card-body">
+                <div class="users form content">
+
+                    <fieldset>
+                        <?php
+                        echo $this->Form->control('username');
+                        echo $this->Form->control('first_name');
+                        echo $this->Form->control('last_name');
+                        echo $this->Form->control('email');
+                        echo $this->Form->control('password');
+                        echo $this->Form->control('token');
+                        echo $this->Form->control('agent');
+                        echo $this->Form->control('customer');
+                        echo $this->Form->control('disabled');
+                        ?>
+                    </fieldset>
+
+                </div>
+            </div>
+            <!-- /.card-body -->
+
+            <div class="card-footer">
+                <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-primary']) ?>
+                <?= $this->Html->link(__('Cancel'), ['action' => 'index'], ['class' => 'btn btn-secondary']); ?>
+
+            </div>
             <?= $this->Form->end() ?>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Properties</h3>
+            </div>
+
+            <div class="card-body">
+                <dl>
+                    <dt>Created</dt>
+                    <dd><?= $user->created;?></dd>
+
+                    <dt>Modified</dt>
+                    <dd><?= $user->created;?></dd>
+                </dl>
+            </div>
         </div>
     </div>
 </div>

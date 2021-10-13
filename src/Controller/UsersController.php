@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use Cake\Log\Log;
+
 /**
  * Users Controller
  *
@@ -18,7 +19,7 @@ class UsersController extends AppController
         parent::beforeFilter($event);
         // Configure the login action to not require authentication, preventing
         // the infinite redirect loop issue
-        $this->Authentication->addUnauthenticatedActions(['index','add', 'edit','view', 'login']);
+        $this->Authentication->addUnauthenticatedActions(['login']);
         //$this->Authentication->requireIdentity(false);
     }
 
@@ -32,25 +33,6 @@ class UsersController extends AppController
         $users = $this->paginate($this->Users);
 
         $this->set(compact('users'));
-
-        Log::write('debug', 'some item');
-    }
-
-    /**
-     * View method
-     *
-     * @param string|null $id User id.
-     * @return \Cake\Http\Response|null|void Renders view
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function view($id = null)
-    {
-        $user = $this->Users->get($id, [
-            'contain' => [],
-        ]);
-
-
-        $this->set(compact('user'));
     }
 
     /**
@@ -84,8 +66,7 @@ class UsersController extends AppController
      */
     public function edit($id = null)
     {
-        $user = $this->Users->get($id, [
-        ]);
+        $user = $this->Users->get($id);
 
         if ($this->request->is(['patch', 'post', 'put'])) {
             $this->Users->patchEntity($user, $this->request->getData());
@@ -110,7 +91,7 @@ class UsersController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $user = $this->Users->get($id);
-        
+
         if ($this->Users->delete($user)) {
             $this->Flash->success(__('The user has been deleted.'));
         } else {

@@ -5,33 +5,38 @@
  * @var \App\Model\Entity\User $user
  */
 ?>
-<h1><?= __("Administrator Accounts");?></h1>
 
-<div class="row">
-    <aside class="col-md-2">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <?= $this->Html->link(__('List Users'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-                </li>
-            </ul>
-        </div>
-    </aside>
-    <div class="col-md-8">
+<div class="card card-primary">
+    <div class="card-header">
+        <h3 class="card-title">Create User</h3>
+    </div>
+
+    <?= $this->Form->create($user) ?>
+    <div class="card-body">
         <div class="users form content">
-            <?= $this->Form->create($user) ?>
+
             <fieldset>
-                <legend><?= __('Edit User') ?></legend>
                 <?php
                 echo $this->Form->control('username');
+                echo $this->Form->control('first_name');
+                echo $this->Form->control('last_name');
                 echo $this->Form->control('email');
                 echo $this->Form->control('password');
-                echo $this->Form->control('roles._ids');
+                echo $this->Form->control('token');
+                echo $this->Form->control('agent');
+                echo $this->Form->control('customer');
+                echo $this->Form->control('disabled');
                 ?>
             </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
-            <?= $this->Form->end() ?>
+
         </div>
     </div>
+    <!-- /.card-body -->
+
+    <div class="card-footer">
+        <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-primary']) ?>
+        <?= $this->Html->link(__('Cancel'), ['action' => 'index'], ['class' => 'btn btn-secondary']); ?>
+
+    </div>
+    <?= $this->Form->end() ?>
 </div>
